@@ -1,33 +1,51 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React,{ Component} from 'react';
+import axios from 'axios';
+import MainLayout from '../components/layouts/mainLayout';
+import MyStyle from '../styles/main.css';
 
-import MainLayout from "../layouts/mainLayout";
+class Home extends Component {
+    static async getInitialProps({pathname,query,asPath,req,res}){
+        let userData;
 
-const Home = ({ name, lastname }) => {
-  const [user, setUser] = useState({});
+        try {
+            const response = await axios.get('https://jsonplaceholder.typicode.com/users/1')
+            userData = response.data;
+        } catch {
+            console.log('error')
+        }
 
-  useEffect(() => {
-    const userFromProps = {
-      name,
-      lastname
-    };
-    setUser(userFromProps);
-  }, [name, lastname]);
+        // console.log(pathname)
+        //  console.log(query)
+        // console.log(req)
 
-  console.log(user);
-  return (
-    <>
-      <MainLayout>
-        <h1>
-          Wellcome Mr. {user.name} {user.lastname}
-        </h1>
-      </MainLayout>
-    </>
-  );
-};
+        return {
+            user:{
+                name:'Francis',
+                lastname:'Jones'
+            },
+            userData
+        }
+    }
 
-Home.getInitialProps = () => {
-  return { name: "King", lastname: "Kong" };
-};
+    constructor(props){
+        super(props)
+
+        this.state = {
+            user: this.props.user,
+            userData: this.props.userData
+        }
+    }
+
+    render(){
+       // console.log(this.state);
+        return(
+            <>
+                <MainLayout>
+                    <h1>Welcome to my page, guys</h1>
+                </MainLayout>
+            </>
+        )
+    }
+}
 
 export default Home;
