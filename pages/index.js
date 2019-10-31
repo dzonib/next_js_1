@@ -1,51 +1,57 @@
-import React,{ Component} from 'react';
-import axios from 'axios';
-import MainLayout from '../components/layouts/mainLayout';
-import MyStyle from '../styles/main.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import MainLayout from "../components/layouts/mainLayout";
+import Link from "next/link";
+// import MyStyle from "../styles/main.css";
 
-class Home extends Component {
-    static async getInitialProps({pathname,query,asPath,req,res}){
-        let userData;
+const Home = props => {
+  const [users, setUsers] = useState([]);
 
-        try {
-            const response = await axios.get('https://jsonplaceholder.typicode.com/users/1')
-            userData = response.data;
-        } catch {
-            console.log('error')
-        }
+  useEffect(() => {
+    setUsers(props.users);
+  }, [props.users]);
 
-        // console.log(pathname)
-        //  console.log(query)
-        // console.log(req)
+  return (
+    <>
+      <MainLayout>
+        <h1>Pick a user</h1>
+        <ul className="list-group">
+          {users.map(user => {
+            return (
+              <li key={user.id} className="list-group-item">
+                {/* this one gives error for some reason */}
+                {/* <Link href={`/users/profile/?userId=${user.id}`}> */}
+                <Link
+                  href={{
+                    pathname: "/users/profile",
+                    query: {
+                      userId: user.id
+                    }
+                  }}
+                >
+                  <a>{user.name}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </MainLayout>
+    </>
+  );
+};
 
-        return {
-            user:{
-                name:'Francis',
-                lastname:'Jones'
-            },
-            userData
-        }
-    }
-
-    constructor(props){
-        super(props)
-
-        this.state = {
-            user: this.props.user,
-            userData: this.props.userData
-        }
-    }
-
-    render(){
-       // console.log(this.state);
-        return(
-            <>
-                <MainLayout>
-                    <h1>Welcome to my page, guys</h1>
-                </MainLayout>
-            </>
-        )
-    }
-}
+Home.getInitialProps = async ({ pathname, query, asPath, req, res }) => {
+  // console.log(pathname)
+  // console.log(query)
+  // console.log(req)
+  try {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    return { users: response.data };
+  } catch {
+    console.log("error");
+  }
+};
 
 export default Home;
