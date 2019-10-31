@@ -22,6 +22,7 @@ const Home = props => {
                 {/* this one gives error for some reason */}
                 {/* <Link href={`/users/profile/?userId=${user.id}`}> */}
                 <Link
+                  as={`/users/profile/${user.id}`}
                   href={{
                     pathname: "/users/profile",
                     query: {

@@ -7,7 +7,7 @@ const Profile = props => {
   return (
     <>
       <MainLayout>
-        <h1>Profile: </h1>
+        <h1>User Profile: </h1>
         <h2>Name: {props.user.name}</h2>
         <h2>Phone: {props.user.phone}</h2>
         <h2>Email: {props.user.email}</h2>
