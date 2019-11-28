@@ -42,9 +42,11 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ pathname, query, asPath, req, res }) => {
-  // console.log(pathname)
-  // console.log(query)
-  // console.log(req)
+  console.log("Initial props runned");
+  // current path / in our case
+  // console.log(pathname);
+  // console.log(query);
+  // console.log(req);
   try {
     const response = await axios.get(
       "https://jsonplaceholder.typicode.com/users"
