@@ -21,6 +21,8 @@ const Home = props => {
               <li key={user.id} className="list-group-item">
                 {/* this one gives error for some reason */}
                 {/* <Link href={`/users/profile/?userId=${user.id}`}> */}
+                {/* if you reload page when on this route it will break */}
+                {/* if you dont have server routes that is */}
                 <Link
                   as={`/users/profile/${user.id}`}
                   href={{

@@ -9,9 +9,11 @@ const Message = props => {
         pathname: "/users/profile",
         query: { userId: 1 }
       },
+      // what is going to be shown
       "/users/profile/1"
     );
   };
+
   return (
     <>
       <div>Hello</div>
