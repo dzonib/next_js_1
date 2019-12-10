@@ -16,6 +16,13 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+<<<<<<< HEAD
+=======
+    "/contact": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+>>>>>>> d6575eead01b2d348a3d791e39554f83a4c52754
     "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
